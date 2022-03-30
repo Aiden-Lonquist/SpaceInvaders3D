@@ -295,13 +295,16 @@
         _bulletYPosition = _shipYPosition;
         _bulletXPosition = _shipXPosition;
         _drawBullet = true;
+        //sound effect for shooting
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
+        NSURL *url = [NSURL URLWithString:path];
+        player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+        
+        [player play];
+    } else{
+        [player stop];
     }
-    //sound effect for shooting
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
-    NSURL *url = [NSURL URLWithString:path];
-    player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
     
-    [player play];
 }
 
 - (IBAction)move:(UIPanGestureRecognizer *)sender
