@@ -50,6 +50,9 @@
     float   _bulletYScale;
     float   _bulletZScale;
     
+    // Score label variables;
+    int     _score;
+    
     // Swipe variables
     float firstX;
 }
@@ -99,6 +102,9 @@
     _bulletXScale = 0.15f;
     _bulletYScale = 0.15f;
     _bulletZScale = 0.15f;
+    
+    // Score at start
+    _score = 0;
     
     // Set up context
     EAGLContext* context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -293,6 +299,8 @@
 
 - (void)update
 {
+    NSString* scoreString = [NSString stringWithFormat:@"Score: %i", _score];
+    _scoreLabel.text = scoreString;
     if (_drawBullet) {
         if (_bulletYPosition < 5.0f) {
             _bulletYPosition += 0.2f;

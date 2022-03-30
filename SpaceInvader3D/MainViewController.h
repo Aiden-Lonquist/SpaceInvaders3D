@@ -10,4 +10,6 @@
 
 @interface MainViewController : GLKViewController
 
+@property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
+
 @end
