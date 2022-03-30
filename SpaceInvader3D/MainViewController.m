@@ -2,7 +2,7 @@
 //  MainViewController.m
 //  GLBlender2
 //
-//  Created by RRC on 7/5/13.
+//  Reference: Created by RRC on 7/5/13.
 //  Copyright (c) 2013 Ricardo Rendon Cepeda. All rights reserved.
 //
 
@@ -14,6 +14,9 @@
 
 @interface MainViewController ()
 {
+    //Audio player
+    AVAudioPlayer *player;
+    
     // Player ship variables
     bool    _drawShip;
     float   _shipXPosition;
@@ -292,7 +295,16 @@
         _bulletYPosition = _shipYPosition;
         _bulletXPosition = _shipXPosition;
         _drawBullet = true;
+        //sound effect for shooting
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
+        NSURL *url = [NSURL URLWithString:path];
+        player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+        
+        [player play];
+    } else{
+        [player stop];
     }
+    
 }
 
 - (IBAction)move:(UIPanGestureRecognizer *)sender
@@ -300,6 +312,15 @@
     CGPoint translation = [sender translationInView:self.view];
     _shipXPosition = sender.view.center.x + translation.x;
 }
+
+//- (IBAction)btn_Audio_play:(id)sender{
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
+//    NSURL *url = [NSURL URLWithString:path];
+//    player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+//
+//    [player play];
+//}
+
 
 - (void)update
 {
@@ -355,6 +376,11 @@
         _drawAlien = false;
         _drawBullet = false;
         _score += 1;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"hit"ofType:@"wav"];
+        NSURL *url = [NSURL URLWithString:path];
+        player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+        
+        [player play];
         NSTimeInterval delayInSeconds = 2.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

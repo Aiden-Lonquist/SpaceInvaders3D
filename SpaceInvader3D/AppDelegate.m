@@ -2,16 +2,27 @@
 //  AppDelegate.m
 //  GLBlender2
 //
-//  Created by RRC on 7/5/13.
+//  Reference: Created by RRC on 7/5/13.
 //  Copyright (c) 2013 Ricardo Rendon Cepeda. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import <AVFoundation/AVFoundation.h>
+
+@interface AppDelegate()
+
+@end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSError *categoryError = nil;
+    BOOL success = [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&categoryError];
+    if (!success)
+    {
+            NSLog(@"AppDelegate Debug - Error setting AVAudioSession category.  Because of this, there may be no sound. `%@`", categoryError);
+    }
     return YES;
 }
 
