@@ -157,7 +157,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0460;
-				ORGANIZATIONNAME = "Ricardo Rendon Cepeda";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					AE7558121787DA48000026A9 = {
 						LastSwiftMigration = 1320;
