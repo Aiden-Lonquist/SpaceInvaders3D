@@ -27,7 +27,7 @@ Player are able to:
 * Found placeholder sprites to use before we implement 3D model
 
 ## Beta Release
-* The scoreboard has created at the top of the screen
+* The score label has created at the top of the screen
 * Sound effects on shooting and hitting has implemented
 * Replaced the current 2D sprites with 3D models
 * Improved the smooth level on mechancis of movement
