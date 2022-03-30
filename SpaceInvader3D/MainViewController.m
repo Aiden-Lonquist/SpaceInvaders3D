@@ -333,13 +333,25 @@
 
 - (void)collisionCheck
 {
-    CGFloat alienGridPOSX = floor(_alienXPosition);
-    CGFloat alienGridPOSY = floor(_alienYPosition);
+    //float alienGridPOSX = floor(_alienXPosition);
+    //float alienGridPOSY = floor(_alienYPosition);
     
-    CGFloat bulletGridPOSX = floor(_bulletXPosition);
-    CGFloat bulletGridPOSY = floor(_bulletYPosition);
+    //float bulletGridPOSX = floor(_bulletXPosition);
+    //float bulletGridPOSY = floor(_bulletYPosition);
+
+    //if (alienGridPOSX == bulletGridPOSX && alienGridPOSY == bulletGridPOSY) {
+    //    _drawAlien = false;
+    //    _drawBullet = false;
+    //    _score += 1;
+    //}
     
-    if (alienGridPOSX == bulletGridPOSX && alienGridPOSY == bulletGridPOSY) {
+    float distanceX = fabsf(_alienXPosition-_bulletXPosition);
+    float distanceY = fabsf(_alienYPosition-_bulletYPosition);
+    
+    //NSLog(@"Y: %f", distanceY);
+    //NSLog(@"X: %f", distanceX);
+    
+    if (distanceX < 0.5 && distanceY < 0.2) {
         _drawAlien = false;
         _drawBullet = false;
         _score += 1;
