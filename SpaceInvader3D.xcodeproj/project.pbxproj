@@ -10,6 +10,9 @@
 		525185D427F3EE1F0085F588 /* Ship.c in Sources */ = {isa = PBXBuildFile; fileRef = 525185D227F3EE1F0085F588 /* Ship.c */; };
 		525185D727F3F1C80085F588 /* Alien.c in Sources */ = {isa = PBXBuildFile; fileRef = 525185D527F3F1C80085F588 /* Alien.c */; };
 		525185DA27F3F4EC0085F588 /* Bullet.c in Sources */ = {isa = PBXBuildFile; fileRef = 525185D827F3F4EC0085F588 /* Bullet.c */; };
+		59D3997527F4425C0034261A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59D3997427F4425C0034261A /* AVFoundation.framework */; };
+		59D3997827F448E40034261A /* shoot.wav in Resources */ = {isa = PBXBuildFile; fileRef = 59D3997627F448E40034261A /* shoot.wav */; };
+		59D3997927F448E40034261A /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 59D3997727F448E40034261A /* hit.wav */; };
 		AE7558171787DA48000026A9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7558161787DA48000026A9 /* UIKit.framework */; };
 		AE7558191787DA48000026A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7558181787DA48000026A9 /* Foundation.framework */; };
 		AE75581B1787DA48000026A9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE75581A1787DA48000026A9 /* CoreGraphics.framework */; };
@@ -32,6 +35,9 @@
 		525185D627F3F1C80085F588 /* Alien.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alien.h; sourceTree = "<group>"; };
 		525185D827F3F4EC0085F588 /* Bullet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Bullet.c; sourceTree = "<group>"; };
 		525185D927F3F4EC0085F588 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		59D3997427F4425C0034261A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		59D3997627F448E40034261A /* shoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shoot.wav; sourceTree = "<group>"; };
+		59D3997727F448E40034261A /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
 		AE7558131787DA48000026A9 /* SpaceInvader3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceInvader3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE7558161787DA48000026A9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AE7558181787DA48000026A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,6 +65,7 @@
 			files = (
 				AE7558361787DAD1000026A9 /* GLKit.framework in Frameworks */,
 				AE7558381787DAD7000026A9 /* OpenGLES.framework in Frameworks */,
+				59D3997527F4425C0034261A /* AVFoundation.framework in Frameworks */,
 				AE7558171787DA48000026A9 /* UIKit.framework in Frameworks */,
 				AE7558191787DA48000026A9 /* Foundation.framework in Frameworks */,
 				AE75581B1787DA48000026A9 /* CoreGraphics.framework in Frameworks */,
@@ -88,6 +95,7 @@
 		AE7558151787DA48000026A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				59D3997427F4425C0034261A /* AVFoundation.framework */,
 				AE7558371787DAD7000026A9 /* OpenGLES.framework */,
 				AE7558351787DAD1000026A9 /* GLKit.framework */,
 				AE7558161787DA48000026A9 /* UIKit.framework */,
@@ -119,6 +127,8 @@
 		AE75581D1787DA48000026A9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				59D3997727F448E40034261A /* hit.wav */,
+				59D3997627F448E40034261A /* shoot.wav */,
 				AE75581E1787DA48000026A9 /* SpaceInvader3D-Info.plist */,
 				AE75581F1787DA48000026A9 /* InfoPlist.strings */,
 				AE7558221787DA48000026A9 /* main.m */,
@@ -191,6 +201,8 @@
 				AE7558291787DA48000026A9 /* Default.png in Resources */,
 				AE75582B1787DA48000026A9 /* Default@2x.png in Resources */,
 				AE75582D1787DA48000026A9 /* Default-568h@2x.png in Resources */,
+				59D3997827F448E40034261A /* shoot.wav in Resources */,
+				59D3997927F448E40034261A /* hit.wav in Resources */,
 				AE7558341787DAA6000026A9 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

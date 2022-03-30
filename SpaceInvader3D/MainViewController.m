@@ -14,6 +14,9 @@
 
 @interface MainViewController ()
 {
+    //Audio player
+    AVAudioPlayer *player;
+    
     // Player ship variables
     bool    _drawShip;
     float   _shipXPosition;
@@ -283,6 +286,12 @@
         _bulletXPosition = _shipXPosition;
         _drawBullet = true;
     }
+    //sound effect for shooting
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
+    NSURL *url = [NSURL URLWithString:path];
+    player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+    
+    [player play];
 }
 
 - (IBAction)move:(UIPanGestureRecognizer *)sender
@@ -290,6 +299,15 @@
     CGPoint translation = [sender translationInView:self.view];
     _shipXPosition = sender.view.center.x + translation.x;
 }
+
+//- (IBAction)btn_Audio_play:(id)sender{
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
+//    NSURL *url = [NSURL URLWithString:path];
+//    player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+//
+//    [player play];
+//}
+
 
 - (void)update
 {
