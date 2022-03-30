@@ -10,5 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface MainViewController : GLKViewController
--(IBAction)btn_Audio_play:(id)sender;
+
+@property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
+
 @end

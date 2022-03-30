@@ -40,6 +40,7 @@
     float   _alienXScale;
     float   _alienYScale;
     float   _alienZScale;
+    bool    _alienMovingRight;
     
     // Bullet variables for one bullet
     bool    _drawBullet;
@@ -53,8 +54,12 @@
     float   _bulletYScale;
     float   _bulletZScale;
     
+    // Score label variables;
+    int     _score;
+    
     // Swipe variables
     float firstX;
+
 }
 
 @property (strong, nonatomic) GLKBaseEffect* effect;
@@ -90,6 +95,7 @@
     _alienXScale = 0.1f;
     _alienYScale = 0.1f;
     _alienZScale = 0.1f;
+    _alienMovingRight = true;
     
     // Bullet variables
     _drawBullet = false;
@@ -102,6 +108,10 @@
     _bulletXScale = 0.15f;
     _bulletYScale = 0.15f;
     _bulletZScale = 0.15f;
+
+    
+    // Score at start
+    _score = 0;
     
     // Set up context
     EAGLContext* context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -311,17 +321,65 @@
 
 - (void)update
 {
+    NSString* scoreString = [NSString stringWithFormat:@"Score: %i", _score];
+    _scoreLabel.text = scoreString;
     if (_drawBullet) {
         if (_bulletYPosition < 5.0f) {
             _bulletYPosition += 0.2f;
+            [self collisionCheck];
         }
         if (_bulletYPosition >= 5.0f) {
             _drawBullet = false;
         }
     }
+    
+    if (_alienMovingRight) {
+        _alienXPosition += 0.05f;
+        if (_alienXPosition > 2.5f) {
+            _alienMovingRight = false;
+        }
+    } else if (!_alienMovingRight) {
+        _alienXPosition -= 0.05f;
+        if (_alienXPosition < -2.5f) {
+            _alienMovingRight = true;
+        }
+    }
 //    _xRotation += 1.0f;
 //    _yRotation += 1.0f;
 //    _zRotation += 1.0f;
+}
+
+- (void)collisionCheck
+{
+    //float alienGridPOSX = floor(_alienXPosition);
+    //float alienGridPOSY = floor(_alienYPosition);
+    
+    //float bulletGridPOSX = floor(_bulletXPosition);
+    //float bulletGridPOSY = floor(_bulletYPosition);
+
+    //if (alienGridPOSX == bulletGridPOSX && alienGridPOSY == bulletGridPOSY) {
+    //    _drawAlien = false;
+    //    _drawBullet = false;
+    //    _score += 1;
+    //}
+    
+    float distanceX = fabsf(_alienXPosition-_bulletXPosition);
+    float distanceY = fabsf(_alienYPosition-_bulletYPosition);
+    
+    //NSLog(@"Y: %f", distanceY);
+    //NSLog(@"X: %f", distanceX);
+    
+    if (distanceX < 0.5 && distanceY < 0.2) {
+        _drawAlien = false;
+        _drawBullet = false;
+        _score += 1;
+        NSTimeInterval delayInSeconds = 2.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+          NSLog(@"Do some work");
+            _drawAlien = true;
+        });
+    }
 }
 
 @end
