@@ -37,6 +37,7 @@
     float   _alienXScale;
     float   _alienYScale;
     float   _alienZScale;
+    bool    _alienMovingRight;
     
     // Bullet variables for one bullet
     bool    _drawBullet;
@@ -52,6 +53,7 @@
     
     // Swipe variables
     float firstX;
+
 }
 
 @property (strong, nonatomic) GLKBaseEffect* effect;
@@ -87,6 +89,7 @@
     _alienXScale = 0.1f;
     _alienYScale = 0.1f;
     _alienZScale = 0.1f;
+    _alienMovingRight = true;
     
     // Bullet variables
     _drawBullet = false;
@@ -99,6 +102,7 @@
     _bulletXScale = 0.15f;
     _bulletYScale = 0.15f;
     _bulletZScale = 0.15f;
+
     
     // Set up context
     EAGLContext* context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -296,14 +300,41 @@
     if (_drawBullet) {
         if (_bulletYPosition < 5.0f) {
             _bulletYPosition += 0.2f;
+            [self collisionCheck];
         }
         if (_bulletYPosition >= 5.0f) {
             _drawBullet = false;
         }
     }
+    
+    if (_alienMovingRight) {
+        _alienXPosition += 0.05f;
+        if (_alienXPosition > 2.5f) {
+            _alienMovingRight = false;
+        }
+    } else if (!_alienMovingRight) {
+        _alienXPosition -= 0.05f;
+        if (_alienXPosition < -2.5f) {
+            _alienMovingRight = true;
+        }
+    }
 //    _xRotation += 1.0f;
 //    _yRotation += 1.0f;
 //    _zRotation += 1.0f;
+}
+
+- (void)collisionCheck
+{
+    CGFloat alienGridPOSX = floor(_alienXPosition);
+    CGFloat alienGridPOSY = floor(_alienYPosition);
+    
+    CGFloat bulletGridPOSX = floor(_bulletXPosition);
+    CGFloat bulletGridPOSY = floor(_bulletYPosition);
+    
+    if (alienGridPOSX == bulletGridPOSX && alienGridPOSY == bulletGridPOSY) {
+        _drawAlien = false;
+        _drawBullet = false;
+    }
 }
 
 @end
