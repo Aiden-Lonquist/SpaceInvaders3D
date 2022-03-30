@@ -30,7 +30,7 @@ Player are able to:
 * The score label has created at the top of the screen
 * Sound effects on shooting and hitting has implemented
 * Replaced the current 2D sprites with 3D models
-* Improved the smooth level on mechancis of movement
+* Improved the smooth level on mechancis of movement (works on 2D, but its not working on 3D)
 * fixed the bug on collisions with grid system
 
 ## Final Release
