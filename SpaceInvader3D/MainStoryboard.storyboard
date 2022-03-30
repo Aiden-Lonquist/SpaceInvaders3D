@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="6Ua-Ty-PqI">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--GLKit View Controller-->
+        <scene sceneID="6Tx-Js-R21">
+            <objects>
+                <glkViewController autoresizesArchivedViewToFullSize="NO" preferredFramesPerSecond="30" id="6Ua-Ty-PqI" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yDp-Q9-Xj1"/>
+                        <viewControllerLayoutGuide type="bottom" id="cJj-K1-GDi"/>
+                    </layoutGuides>
+                    <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gOB-Io-NZM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outlet property="delegate" destination="6Ua-Ty-PqI" id="eZj-Q4-4Hg"/>
+                            <outletCollection property="gestureRecognizers" destination="mfq-FC-WNG" appends="YES" id="8Xp-Ph-SsV"/>
+                        </connections>
+                    </glkView>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                </glkViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ph-Oc-ZZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="mfq-FC-WNG">
+                    <connections>
+                        <action selector="shoot:" destination="6Ua-Ty-PqI" id="9ys-AM-SCX"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Qyt-wV-Kca">
+                    <connections>
+                        <action selector="move:" destination="6Ua-Ty-PqI" id="91e-42-k6H"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="572.46376811594212" y="40.848214285714285"/>
+        </scene>
+    </scenes>
+</document>
