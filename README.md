@@ -36,7 +36,7 @@ At the end of Final release, Player will be able to:
 
 ## Final Release
 
-To be continue...
+To be continued...
 
 
 ## Developer
