@@ -20,13 +20,15 @@ At the end of Final release, Player will be able to:
 * Available: iOS 12 at least above
 * Best Available mobile: at least iPhone XS above 
 
-## Alpha Release
+## Application Changelog
+
+### Alpha Release
 * Created player that can be controlled by swiping
 * Given player functionality for shooting by tapping
 * Tested to Implemented an enemy that if it is moving and dies after it gets hit
 * Found placeholder sprites to use before we implement 3D model
 
-## Beta Release
+### Beta Release
 * The score label has created at the top of the screen
 * Sound effects on shooting and hitting has implemented
 * Replaced the current 2D sprites with 3D models
