@@ -84,7 +84,7 @@
     _shipXPosition = 0.0f;
     _shipYPosition = -3.0f;
     _shipZPosition = -5.0f;
-    _shipXRotation = 90.0f;
+    _shipXRotation = 50.0f; //was 90
     _shipYRotation = 0.0f;
     _shipZRotation = 0.0f;
     _shipXScale = 0.1f;
@@ -96,12 +96,12 @@
     _alienXPosition = 0.0f;
     _alienYPosition = 4.2f;
     _alienZPosition = -5.0f;
-    _alienXRotation = 90.0f;
+    _alienXRotation = 80.0f; //was 90
     _alienYRotation = 180.0f;
     _alienZRotation = 0.0f;
-    _alienXScale = 0.1f;
-    _alienYScale = 0.1f;
-    _alienZScale = 0.1f;
+    _alienXScale = 0.06f; //was 0.1
+    _alienYScale = 0.06f; //was 0.1
+    _alienZScale = 0.06f; //was 0.1
     _alienMovingRight = true;
     
     // Bullet variables
@@ -363,12 +363,18 @@
         if (_alienXPosition > 2.5f) {
             _alienMovingRight = false;
             _alienYPosition -= 0.5f;
+            _alienXScale += 0.004;
+            _alienYScale += 0.004;
+            _alienZScale += 0.004;
         }
     } else if (!_alienMovingRight) {
         _alienXPosition -= 0.05f;
         if (_alienXPosition < -2.5f) {
             _alienMovingRight = true;
             _alienYPosition -= 0.5f;
+            _alienXScale += 0.004;
+            _alienYScale += 0.004;
+            _alienZScale += 0.004;
         }
     }
     
@@ -401,6 +407,10 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
       //NSLog(@"Do some work");
+        _alienYPosition = 4.2;
+        _alienXScale = 0.06;
+        _alienYScale = 0.06;
+        _alienZScale = 0.06;
         _drawAlien = true;
     });
 }
