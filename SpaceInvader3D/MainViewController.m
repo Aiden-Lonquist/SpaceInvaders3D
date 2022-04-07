@@ -42,6 +42,9 @@
     float   _alienZScale;
     bool    _alienMovingRight;
     
+    // Alien wave variables
+    NSMutableArray *aliens;
+    
     // Bullet variables for one bullet
     bool    _drawBullet;
     float   _bulletXPosition;
@@ -127,6 +130,11 @@
     
     // Create effect
     [self createEffect];
+    
+    //create pan gesture
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self  action:@selector(handlePan:)];
+    [self.view addGestureRecognizer:pan];
+    
 }
 
 - (void)createEffect
@@ -304,14 +312,15 @@
     } else{
         [player stop];
     }
-    
 }
 
-- (IBAction)move:(UIPanGestureRecognizer *)sender
+-(void)handlePan:(UIPanGestureRecognizer *)sender
 {
     CGPoint translation = [sender translationInView:self.view];
-    _shipXPosition = sender.view.center.x + translation.x;
+    _shipXPosition += translation.x/55;
+    [sender setTranslation:CGPointZero inView:self.view];
 }
+
 
 //- (IBAction)btn_Audio_play:(id)sender{
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
@@ -340,13 +349,16 @@
         _alienXPosition += 0.05f;
         if (_alienXPosition > 2.5f) {
             _alienMovingRight = false;
+            _alienYPosition -= 0.5f;
         }
     } else if (!_alienMovingRight) {
         _alienXPosition -= 0.05f;
         if (_alienXPosition < -2.5f) {
             _alienMovingRight = true;
+            _alienYPosition -= 0.5f;
         }
     }
+    
 //    _xRotation += 1.0f;
 //    _yRotation += 1.0f;
 //    _zRotation += 1.0f;
@@ -354,23 +366,8 @@
 
 - (void)collisionCheck
 {
-    //float alienGridPOSX = floor(_alienXPosition);
-    //float alienGridPOSY = floor(_alienYPosition);
-    
-    //float bulletGridPOSX = floor(_bulletXPosition);
-    //float bulletGridPOSY = floor(_bulletYPosition);
-
-    //if (alienGridPOSX == bulletGridPOSX && alienGridPOSY == bulletGridPOSY) {
-    //    _drawAlien = false;
-    //    _drawBullet = false;
-    //    _score += 1;
-    //}
-    
     float distanceX = fabsf(_alienXPosition-_bulletXPosition);
     float distanceY = fabsf(_alienYPosition-_bulletYPosition);
-    
-    //NSLog(@"Y: %f", distanceY);
-    //NSLog(@"X: %f", distanceX);
     
     if (distanceX < 0.5 && distanceY < 0.2) {
         _drawAlien = false;
@@ -381,13 +378,18 @@
         player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
         
         [player play];
-        NSTimeInterval delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-          NSLog(@"Do some work");
-            _drawAlien = true;
-        });
+        [self spawnAlien];
     }
+}
+
+-(void)spawnAlien
+{
+    NSTimeInterval delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      //NSLog(@"Do some work");
+        _drawAlien = true;
+    });
 }
 
 @end
