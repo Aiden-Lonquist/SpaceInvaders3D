@@ -12,6 +12,7 @@
 #import "Bullet.h"
 //Import header file for model to use here
 
+
 @interface MainViewController ()
 {
     //Audio player
@@ -63,6 +64,7 @@
     // Swipe variables
     float firstX;
 
+
 }
 
 @property (strong, nonatomic) GLKBaseEffect* effect;
@@ -74,6 +76,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     
     // Player ship variables
     _drawShip = true;
@@ -317,7 +321,16 @@
 -(void)handlePan:(UIPanGestureRecognizer *)sender
 {
     CGPoint translation = [sender translationInView:self.view];
-    _shipXPosition += translation.x/55;
+    if (_shipXPosition > 2.5)
+    {
+        _shipXPosition = 2.5;
+    } else if (_shipXPosition < -2.5)
+    {
+        _shipXPosition = -2.5;
+    } else
+    {
+        _shipXPosition += translation.x/55;
+    }
     [sender setTranslation:CGPointZero inView:self.view];
 }
 
