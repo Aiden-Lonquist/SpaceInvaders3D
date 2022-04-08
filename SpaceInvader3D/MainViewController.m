@@ -60,6 +60,7 @@
     
     // Score label variables;
     int     _score;
+    int     _highScore;
     
     // Swipe variables
     float firstX;
@@ -119,6 +120,11 @@
     
     // Score at start
     _score = 0;
+    
+    // High score retrieval
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *stringHighScore = [prefs stringForKey:@"highScore"];
+    _highScore = [stringHighScore intValue];
     
     // Set up context
     EAGLContext* context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -346,8 +352,17 @@
 
 - (void)update
 {
+    if (_score > _highScore) {
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        NSString* newHighScore = [NSString stringWithFormat:@"%i", _score];
+        [prefs setObject:newHighScore forKey:@"highScore"];
+        _highScore = _score;
+    }
+    
     NSString* scoreString = [NSString stringWithFormat:@"Score: %i", _score];
     _scoreLabel.text = scoreString;
+    NSString* highScoreString = [NSString stringWithFormat:@"%i :High Score", _highScore];
+    _highScoreLabel.text = highScoreString;
     if (_drawBullet) {
         if (_bulletYPosition < 5.0f) {
             _bulletYPosition += 0.2f;
