@@ -32,12 +32,16 @@
                                 <color key="textColor" red="0.15025170269999999" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bIe-g2-muB">
-                                <rect key="frame" x="223" y="0.0" width="80" height="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiQ-Md-d6O" userLabel="Game Over Label">
+                                <rect key="frame" x="121" y="178" width="172" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Menu"/>
-                            </button>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.15051761662129851" green="0.85410255193710327" blue="0.0013145102856516725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <gestureRecognizers/>
                         <connections>
@@ -47,6 +51,7 @@
                     </glkView>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="gameOverLabel" destination="yiQ-Md-d6O" id="vkG-UE-oc3"/>
                         <outlet property="highScoreLabel" destination="Mhl-vg-P3c" id="dRl-kL-Cj2"/>
                         <outlet property="scoreLabel" destination="Cyd-uh-0i8" id="gt0-Rm-P8I"/>
                     </connections>
