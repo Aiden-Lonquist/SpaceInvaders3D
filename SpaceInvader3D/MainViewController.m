@@ -81,8 +81,6 @@
 {
     [super viewDidLoad];
     
-    
-    
     // Player ship variables
     _drawShip = true;
     _shipXPosition = 0.0f;
@@ -127,6 +125,9 @@
     _timer = 0;
     
     _isGameOver = false;
+    _btnRestart.enabled = false;
+    _btnRestart.hidden = true;
+    [_btnRestart addTarget:self action:@selector(restartGame) forControlEvents:UIControlEventTouchUpInside];
     
     // High score retrieval
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -363,8 +364,6 @@
 - (void)update
 {
     if (_isGameOver) {
-        NSString* gameOverString = [NSString stringWithFormat:@"Game Over"];
-        _gameOverLabel.text = gameOverString;
         return;
     }
     
@@ -460,6 +459,11 @@
         _drawBullet = false;
         
         _isGameOver = true;
+        _btnRestart.enabled = true;
+        _btnRestart.hidden = false;
+        
+        NSString* gameOverString = [NSString stringWithFormat:@"Game Over"];
+        _gameOverLabel.text = gameOverString;
     }
 }
 -(void)spawnAlien
@@ -476,4 +480,22 @@
     });
 }
 
+- (void)restartGame
+{
+    _shipXPosition = 0.0f;
+    _shipYPosition = -3.0f;
+    _drawShip = true;
+    _alienXPosition = 0.0f;
+    _alienYPosition = 4.2f;
+    _drawAlien = true;
+    
+    _score = 0;
+    _difficultyMultiplier = 1.0f;
+    _timer = 0;
+    _isGameOver = false;
+    
+    _btnRestart.enabled = false;
+    _btnRestart.hidden = true;
+    _gameOverLabel.text = @"";
+}
 @end
