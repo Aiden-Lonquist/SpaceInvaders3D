@@ -63,6 +63,7 @@
     int     _highScore;
     float   _difficultyMultiplier;
     float   _timer;
+    bool    _isGameOver;
     
     // Swipe variables
     float firstX;
@@ -97,7 +98,7 @@
     // Alien variables
     _drawAlien = true;
     _alienXPosition = 0.0f;
-    _alienYPosition = 4.2f;
+    _alienYPosition = 4.2f; //was 4.2f
     _alienZPosition = -5.0f;
     _alienXRotation = 80.0f; //was 90
     _alienYRotation = 180.0f;
@@ -124,6 +125,8 @@
     _score = 0;
     _difficultyMultiplier = 1.0f;
     _timer = 0;
+    
+    _isGameOver = false;
     
     // High score retrieval
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -356,6 +359,12 @@
 
 - (void)update
 {
+    if (_isGameOver) {
+        NSString* gameOverString = [NSString stringWithFormat:@"Game Over"];
+        _gameOverLabel.text = gameOverString;
+        return;
+    }
+    
     if (_score > _highScore) {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         NSString* newHighScore = [NSString stringWithFormat:@"%i", _score];
@@ -415,6 +424,8 @@
     //difficulty check
     //NSLog(@"the difficulty: _difficultyMultiplier = %f", _difficultyMultiplier);
     
+    // Check if the player lost
+    [self collisionCheckLose];
 }
 
 - (void)collisionCheck
@@ -435,6 +446,19 @@
     }
 }
 
+- (void)collisionCheckLose
+{
+    float distanceX = fabsf(_alienXPosition-_shipXPosition);
+    float distanceY = fabsf(_alienYPosition-_shipYPosition);
+    
+    if (distanceX < 0.5 && distanceY < 0.2) {
+        _drawShip = false;
+        _drawAlien = false;
+        _drawBullet = false;
+        
+        _isGameOver = true;
+    }
+}
 -(void)spawnAlien
 {
     NSTimeInterval delayInSeconds = 2.0;
