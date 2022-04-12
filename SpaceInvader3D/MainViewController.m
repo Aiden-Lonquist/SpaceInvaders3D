@@ -61,6 +61,8 @@
     // Score label variables;
     int     _score;
     int     _highScore;
+    float   _difficultyMultiplier;
+    float   _timer;
     
     // Swipe variables
     float firstX;
@@ -120,6 +122,8 @@
     
     // Score at start
     _score = 0;
+    _difficultyMultiplier = 1.0f;
+    _timer = 0;
     
     // High score retrieval
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -377,7 +381,7 @@
     }
     
     if (_alienMovingRight) {
-        _alienXPosition += 0.05f;
+        _alienXPosition += 0.05f*_difficultyMultiplier;
         if (_alienXPosition > 2.5f) {
             _alienMovingRight = false;
             _alienYPosition -= 0.5f;
@@ -386,7 +390,7 @@
             _alienZScale += 0.004;
         }
     } else if (!_alienMovingRight) {
-        _alienXPosition -= 0.05f;
+        _alienXPosition -= 0.05f*_difficultyMultiplier;
         if (_alienXPosition < -2.5f) {
             _alienMovingRight = true;
             _alienYPosition -= 0.5f;
@@ -399,6 +403,21 @@
 //    _xRotation += 1.0f;
 //    _yRotation += 1.0f;
 //    _zRotation += 1.0f;
+    
+    
+    //linear timer
+    if (_difficultyMultiplier < 4)
+    {
+        _difficultyMultiplier += 0.0005;
+    }
+    
+    //parabolic timer (linear felt better to play)
+    //_timer += 0.01;
+    //_difficultyMultiplier = -3 * pow((1/(_timer/2 + 1)), 0.1) +4;
+    
+    //difficulty check
+    //NSLog(@"the difficulty: _difficultyMultiplier = %f", _difficultyMultiplier);
+    
 }
 
 - (void)collisionCheck
