@@ -377,7 +377,7 @@
     
     NSString* scoreString = [NSString stringWithFormat:@"Score: %i", _score];
     _scoreLabel.text = scoreString;
-    NSString* highScoreString = [NSString stringWithFormat:@"%i :High Score", _highScore];
+    NSString* highScoreString = [NSString stringWithFormat:@"High Score: %i", _highScore];
     _highScoreLabel.text = highScoreString;
     if (_drawBullet) {
         if (_bulletYPosition < 5.0f) {
