@@ -134,6 +134,9 @@
     GLKView* glkView = (GLKView *) self.view;
     glkView.context = context;
     
+    //Set Background Image
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    
     // OpenGL ES Settings
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glEnable(GL_CULL_FACE);
