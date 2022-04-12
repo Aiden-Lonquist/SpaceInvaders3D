@@ -13,5 +13,5 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
 @property (nonatomic, weak) IBOutlet UILabel *highScoreLabel;
-
+@property (nonatomic, weak) IBOutlet UILabel *gameOverLabel;
 @end
