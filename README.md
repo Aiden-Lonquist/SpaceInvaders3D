@@ -35,9 +35,15 @@ At the end of Final release, Player will be able to:
 * fixed the bug on collisions with grid system
 
 ## Final Release
+* Implemented multiple waves of enemies
+* Implemented Siddiculty and time correlation
+* Player Movement Imporvement
+* Created lose condition and Restart Function
+* High Score Tracking in the game
 
-To be continued...
-
+## Need to improve base on the playtest result
+* Menu Screen
+* Background Image & Music
 
 ## Developer
 Team Titan:
@@ -56,4 +62,3 @@ Team Titan:
 
 * [Hit Sound](https://freesound.org/people/InspectorJ/sounds/448226/)
 
-* [Background music](https://www.classicgaming.cc/classics/space-invaders/sounds)
