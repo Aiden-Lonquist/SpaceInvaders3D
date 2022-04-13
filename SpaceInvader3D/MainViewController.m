@@ -456,7 +456,7 @@ const int numBullets = 5;
 {
     for (int alienShip = 0; alienShip < numAliens; alienShip++) {
         for (int bulletNumber = 0; bulletNumber < numBullets; bulletNumber++) {
-            if (alienArray[alienShip]._drawAlien) {
+            if (alienArray[alienShip]._drawAlien && bulletArray[bulletNumber]._drawBullet) {
                 float distanceX = fabsf(alienArray[alienShip]._alienXPosition-bulletArray[bulletNumber]._bulletXPosition);
                 float distanceY = fabsf(alienArray[alienShip]._alienYPosition-bulletArray[bulletNumber]._bulletYPosition);
                 
@@ -492,20 +492,28 @@ const int numBullets = 5;
 
 - (void)collisionCheckLose
 {
-    float distanceX = fabsf(_alienXPosition-_shipXPosition);
-    float distanceY = fabsf(_alienYPosition-_shipYPosition);
-    
-    if (distanceX < 0.5 && distanceY < 0.2) {
-        _drawShip = false;
-        _drawAlien = false;
-        _drawBullet = false;
+    for (int alienShipNumber = 0; alienShipNumber < numAliens; alienShipNumber++) {
+        float distanceX = fabsf(alienArray[alienShipNumber]._alienXPosition-_shipXPosition);
+        float distanceY = fabsf(alienArray[alienShipNumber]._alienYPosition-_shipYPosition);
         
-        _isGameOver = true;
-        _btnRestart.enabled = true;
-        _btnRestart.hidden = false;
-        
-        NSString* gameOverString = [NSString stringWithFormat:@"Game Over"];
-        _gameOverLabel.text = gameOverString;
+        if (distanceX < 0.5 && distanceY < 0.2) {
+            _drawShip = false;
+            for (int clearAlienNumber = 0; clearAlienNumber < numAliens; clearAlienNumber++) {
+                alienArray[clearAlienNumber]._drawAlien = false;
+            }
+//            _drawAlien = false;
+            for (int clearBulletNumber = 0; clearBulletNumber < numBullets; clearBulletNumber++) {
+                bulletArray[clearBulletNumber]._drawBullet = false;
+            }
+//            _drawBullet = false;
+            
+            _isGameOver = true;
+            _btnRestart.enabled = true;
+            _btnRestart.hidden = false;
+            
+            NSString* gameOverString = [NSString stringWithFormat:@"Game Over"];
+            _gameOverLabel.text = gameOverString;
+        }
     }
 }
 
@@ -514,9 +522,16 @@ const int numBullets = 5;
     _shipXPosition = 0.0f;
     _shipYPosition = -3.0f;
     _drawShip = true;
-    _alienXPosition = 0.0f;
-    _alienYPosition = 4.2f;
-    _drawAlien = true;
+    
+//    for (int alienToReset = 0; alienToReset < numAliens; alienToReset++) {
+//        alienArray[alienToReset] = NULL;
+//    }
+    
+    [self setUpAliens];
+    
+//    _alienXPosition = 0.0f;
+//    _alienYPosition = 4.2f;
+//    _drawAlien = true;
     
     _score = 0;
     _difficultyMultiplier = 1.0f;
