@@ -415,18 +415,18 @@ const int numBullets = 5;
             if (alienArray[alienToMove]._alienXPosition > 2.5f) {
                 alienArray[alienToMove]._alienMovingRight = false;
                 alienArray[alienToMove]._alienYPosition -= 0.5f;
-//                alienArray[alienToMove]._alienXScale += 0.004;
-//                alienArray[alienToMove]._alienYScale += 0.004;
-//                alienArray[alienToMove]._alienZScale += 0.004;
+                alienArray[alienToMove]._alienXScale += 0.001;
+                alienArray[alienToMove]._alienYScale += 0.001;
+                alienArray[alienToMove]._alienZScale += 0.001;
             }
         } else if (!alienArray[alienToMove]._alienMovingRight) {
             alienArray[alienToMove]._alienXPosition -= 0.05f*_difficultyMultiplier;
             if (alienArray[alienToMove]._alienXPosition < -2.5f) {
                 alienArray[alienToMove]._alienMovingRight = true;
                 alienArray[alienToMove]._alienYPosition -= 0.5f;
-//                alienArray[alienToMove]._alienXScale += 0.004;
-//                alienArray[alienToMove]._alienYScale += 0.004;
-//                alienArray[alienToMove]._alienZScale += 0.004;
+                alienArray[alienToMove]._alienXScale += 0.001;
+                alienArray[alienToMove]._alienYScale += 0.001;
+                alienArray[alienToMove]._alienZScale += 0.001;
             }
         }
         if (alienArray[alienToMove]._alienYPosition < -5.0f) {
