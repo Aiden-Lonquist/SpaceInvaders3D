@@ -33,6 +33,7 @@ At the end of Final release, Player will be able to:
 * Replaced the current 2D sprites with 3D models
 * Improved the smooth level on mechancis of movement (works on 2D, but its not working on 3D)
 * fixed the bug on collisions with grid system
+* Mechanics Overhual
 
 ## Final Release
 * Implemented multiple waves of enemies
@@ -43,16 +44,19 @@ At the end of Final release, Player will be able to:
 
 ## Need to improve base on the playtest result
 * Menu Screen
-* Background Image & Music
+* Background Image
+* Different Types of enemies
+* Add difficulty settings
+* Add player power-ups/different attacks
 
 ## Developer
 Team Titan:
 
-* Aiden Lonquist
+* Aiden Lonquist (Team Lead)
+* Parker Chen
 * Jacky Lau
 * James Pike
-* Parker Chen
-* Cole. Atkinson
+* Cole Atkinson
 
 ## Credit & Reference
 
