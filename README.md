@@ -48,11 +48,11 @@ At the end of Final release, Player will be able to:
 ## Developer
 Team Titan:
 
-* Aiden
-* Jacky
-* James
-* Parker
-* Cole
+* Aiden Lonquist
+* Jacky Lau
+* James Pike
+* Parker Chen
+* Cole. Atkinson
 
 ## Credit & Reference
 
