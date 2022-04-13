@@ -15,4 +15,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *highScoreLabel;
 @property (nonatomic, weak) IBOutlet UILabel *gameOverLabel;
 @property (weak, nonatomic) IBOutlet UIButton *btnRestart;
+@property (weak, nonatomic) IBOutlet UIButton *BtnPlayMusic;
+
 @end

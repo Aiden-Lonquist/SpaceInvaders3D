@@ -10,6 +10,10 @@
 #import "Ship.h"
 #import "Alien.h"
 #import "Bullet.h"
+#import <GLkit/GLkit.h>
+#import <OpenGLES/ES3/gl.h>
+#import <OpenGLES/ES3/glext.h>
+
 //Import header file for model to use here
 
 
@@ -67,7 +71,9 @@
     
     // Swipe variables
     float firstX;
-
+    
+    // Image
+    bool _drawImage;
 
 }
 
@@ -142,8 +148,13 @@
     GLKView* glkView = (GLKView *) self.view;
     glkView.context = context;
     
-    //Set Background Image
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+//    //Set Background Image
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+////    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+////    [self.view insertSubview:backgroundView atIndex:0];
+//    self.view.backgroundColor = [UIColor clearColor];
+    //Set Background Music
+
     
     // OpenGL ES Settings
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -352,13 +363,13 @@
 }
 
 
-//- (IBAction)btn_Audio_play:(id)sender{
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
-//    NSURL *url = [NSURL URLWithString:path];
-//    player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
-//
-//    [player play];
-//}
+- (IBAction)btnplay:(id)sender{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"spaceinvaders1"ofType:@"mp3"];
+    NSURL *url = [NSURL URLWithString:path];
+    player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+
+    [player play];
+}
 
 
 - (void)update
@@ -498,4 +509,7 @@
     _btnRestart.hidden = true;
     _gameOverLabel.text = @"";
 }
+
+
 @end
+

@@ -51,6 +51,15 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                 </buttonConfiguration>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cuf-rE-9jb" userLabel="Play Music">
+                                <rect key="frame" x="20" y="0.0" width="63" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Music"/>
+                                <connections>
+                                    <action selector="btnplay:" destination="6Ua-Ty-PqI" eventType="touchUpInside" id="Pmi-Lx-Nca"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <gestureRecognizers/>
                         <connections>
@@ -60,6 +69,7 @@
                     </glkView>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="BtnPlayMusic" destination="cuf-rE-9jb" id="qlO-le-Erw"/>
                         <outlet property="btnRestart" destination="gqu-tK-YaU" id="I6A-tU-YmI"/>
                         <outlet property="gameOverLabel" destination="yiQ-Md-d6O" id="vkG-UE-oc3"/>
                         <outlet property="highScoreLabel" destination="Mhl-vg-P3c" id="dRl-kL-Cj2"/>
