@@ -24,6 +24,7 @@ const int numBullets = 5;
 //    AVAudioPlayer *player;
     AVAudioPlayer *bulletSoundPlayer[numBullets];
     AVAudioPlayer *hitSoundPlayer[numAliens];
+    AVAudioPlayer *musicAudioPlayer;
     
     // Player ship variables
     bool    _drawShip;
@@ -182,6 +183,8 @@ const int numBullets = 5;
     //create pan gesture
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self  action:@selector(handlePan:)];
     [self.view addGestureRecognizer:pan];
+    
+    //set BGM
     
 }
 
@@ -478,7 +481,7 @@ const int numBullets = 5;
 
 -(void)spawnAlien : (int)shipNumber
 {
-    NSTimeInterval delayInSeconds = 2.0;
+    NSTimeInterval delayInSeconds = 3.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
       //NSLog(@"Do some work");

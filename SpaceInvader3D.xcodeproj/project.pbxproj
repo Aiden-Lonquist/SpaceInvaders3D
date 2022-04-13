@@ -10,6 +10,7 @@
 		525185D427F3EE1F0085F588 /* Ship.c in Sources */ = {isa = PBXBuildFile; fileRef = 525185D227F3EE1F0085F588 /* Ship.c */; };
 		525185D727F3F1C80085F588 /* Alien.c in Sources */ = {isa = PBXBuildFile; fileRef = 525185D527F3F1C80085F588 /* Alien.c */; };
 		525185DA27F3F4EC0085F588 /* Bullet.c in Sources */ = {isa = PBXBuildFile; fileRef = 525185D827F3F4EC0085F588 /* Bullet.c */; };
+		59AB43552806BFBA00E0F306 /* bgm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59AB43542806BFBA00E0F306 /* bgm.mp3 */; };
 		59D3997527F4425C0034261A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59D3997427F4425C0034261A /* AVFoundation.framework */; };
 		59D3997827F448E40034261A /* shoot.wav in Resources */ = {isa = PBXBuildFile; fileRef = 59D3997627F448E40034261A /* shoot.wav */; };
 		59D3997927F448E40034261A /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 59D3997727F448E40034261A /* hit.wav */; };
@@ -35,6 +36,7 @@
 		525185D627F3F1C80085F588 /* Alien.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alien.h; sourceTree = "<group>"; };
 		525185D827F3F4EC0085F588 /* Bullet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Bullet.c; sourceTree = "<group>"; };
 		525185D927F3F4EC0085F588 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		59AB43542806BFBA00E0F306 /* bgm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgm.mp3; sourceTree = "<group>"; };
 		59D3997427F4425C0034261A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		59D3997627F448E40034261A /* shoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shoot.wav; sourceTree = "<group>"; };
 		59D3997727F448E40034261A /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		AE75581D1787DA48000026A9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				59AB43542806BFBA00E0F306 /* bgm.mp3 */,
 				59D3997727F448E40034261A /* hit.wav */,
 				59D3997627F448E40034261A /* shoot.wav */,
 				AE75581E1787DA48000026A9 /* SpaceInvader3D-Info.plist */,
@@ -170,6 +173,7 @@
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					AE7558121787DA48000026A9 = {
+						DevelopmentTeam = WS4472B86R;
 						LastSwiftMigration = 1320;
 					};
 				};
@@ -200,6 +204,7 @@
 				AE7558211787DA48000026A9 /* InfoPlist.strings in Resources */,
 				AE7558291787DA48000026A9 /* Default.png in Resources */,
 				AE75582B1787DA48000026A9 /* Default@2x.png in Resources */,
+				59AB43552806BFBA00E0F306 /* bgm.mp3 in Resources */,
 				AE75582D1787DA48000026A9 /* Default-568h@2x.png in Resources */,
 				59D3997827F448E40034261A /* shoot.wav in Resources */,
 				59D3997927F448E40034261A /* hit.wav in Resources */,
@@ -297,12 +302,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = WS4472B86R;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpaceInvader3D/SpaceInvader3D-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = GLES_SILENCE_DEPRECATION;
 				INFOPLIST_FILE = "SpaceInvader3D/SpaceInvader3D-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rendoncepeda.SpaceInvader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SpaceInvader3D/SpaceInvader3D-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -315,12 +322,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = WS4472B86R;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpaceInvader3D/SpaceInvader3D-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = GLES_SILENCE_DEPRECATION;
 				INFOPLIST_FILE = "SpaceInvader3D/SpaceInvader3D-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rendoncepeda.SpaceInvader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SpaceInvader3D/SpaceInvader3D-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
