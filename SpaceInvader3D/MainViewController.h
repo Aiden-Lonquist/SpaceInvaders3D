@@ -43,5 +43,6 @@ typedef struct Alien {
 
 @property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
 @property (nonatomic, weak) IBOutlet UILabel *highScoreLabel;
-
+@property (nonatomic, weak) IBOutlet UILabel *gameOverLabel;
+@property (weak, nonatomic) IBOutlet UIButton *btnRestart;
 @end

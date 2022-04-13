@@ -68,6 +68,9 @@ const int numBullets = 5;
     // Score label variables;
     int     _score;
     int     _highScore;
+    float   _difficultyMultiplier;
+    float   _timer;
+    bool    _isGameOver;
     
     // Swipe variables
     float firstX;
@@ -134,7 +137,6 @@ const int numBullets = 5;
 
     [self setUpBullets];
     
-    
     // Player ship variables
     _drawShip = true;
     _shipXPosition = 0.0f;
@@ -149,6 +151,13 @@ const int numBullets = 5;
     
     // Score at start
     _score = 0;
+    _difficultyMultiplier = 1.0f;
+    _timer = 0;
+    
+    _isGameOver = false;
+    _btnRestart.enabled = false;
+    _btnRestart.hidden = true;
+    [_btnRestart addTarget:self action:@selector(restartGame) forControlEvents:UIControlEventTouchUpInside];
     
     // High score retrieval
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -374,6 +383,10 @@ const int numBullets = 5;
 
 - (void)update
 {
+    if (_isGameOver) {
+        return;
+    }
+    
     if (_score > _highScore) {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         NSString* newHighScore = [NSString stringWithFormat:@"%i", _score];
@@ -398,7 +411,7 @@ const int numBullets = 5;
     
     for (int alienToMove = 0; alienToMove < numAliens; alienToMove++) {
         if (alienArray[alienToMove]._alienMovingRight) {
-            alienArray[alienToMove]._alienXPosition += 0.05f;
+            alienArray[alienToMove]._alienXPosition += 0.05f*_difficultyMultiplier;
             if (alienArray[alienToMove]._alienXPosition > 2.5f) {
                 alienArray[alienToMove]._alienMovingRight = false;
                 alienArray[alienToMove]._alienYPosition -= 0.5f;
@@ -407,7 +420,7 @@ const int numBullets = 5;
 //                alienArray[alienToMove]._alienZScale += 0.004;
             }
         } else if (!alienArray[alienToMove]._alienMovingRight) {
-            alienArray[alienToMove]._alienXPosition -= 0.05f;
+            alienArray[alienToMove]._alienXPosition -= 0.05f*_difficultyMultiplier;
             if (alienArray[alienToMove]._alienXPosition < -2.5f) {
                 alienArray[alienToMove]._alienMovingRight = true;
                 alienArray[alienToMove]._alienYPosition -= 0.5f;
@@ -421,6 +434,22 @@ const int numBullets = 5;
             alienArray[alienToMove]._alienYPosition = 5.0f;
         }
     }
+    
+    //linear timer
+    if (_difficultyMultiplier < 4)
+    {
+        _difficultyMultiplier += 0.0005;
+    }
+    
+    //parabolic timer (linear felt better to play)
+    //_timer += 0.01;
+    //_difficultyMultiplier = -3 * pow((1/(_timer/2 + 1)), 0.1) +4;
+    
+    //difficulty check
+    //NSLog(@"the difficulty: _difficultyMultiplier = %f", _difficultyMultiplier);
+    
+    // Check if the player lost
+    [self collisionCheckLose];
 }
 
 - (void)collisionCheck
@@ -461,4 +490,41 @@ const int numBullets = 5;
     });
 }
 
+- (void)collisionCheckLose
+{
+    float distanceX = fabsf(_alienXPosition-_shipXPosition);
+    float distanceY = fabsf(_alienYPosition-_shipYPosition);
+    
+    if (distanceX < 0.5 && distanceY < 0.2) {
+        _drawShip = false;
+        _drawAlien = false;
+        _drawBullet = false;
+        
+        _isGameOver = true;
+        _btnRestart.enabled = true;
+        _btnRestart.hidden = false;
+        
+        NSString* gameOverString = [NSString stringWithFormat:@"Game Over"];
+        _gameOverLabel.text = gameOverString;
+    }
+}
+
+- (void)restartGame
+{
+    _shipXPosition = 0.0f;
+    _shipYPosition = -3.0f;
+    _drawShip = true;
+    _alienXPosition = 0.0f;
+    _alienYPosition = 4.2f;
+    _drawAlien = true;
+    
+    _score = 0;
+    _difficultyMultiplier = 1.0f;
+    _timer = 0;
+    _isGameOver = false;
+    
+    _btnRestart.enabled = false;
+    _btnRestart.hidden = true;
+    _gameOverLabel.text = @"";
+}
 @end

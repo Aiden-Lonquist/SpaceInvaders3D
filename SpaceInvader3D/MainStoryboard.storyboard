@@ -32,6 +32,25 @@
                                 <color key="textColor" red="0.15025170269999999" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiQ-Md-d6O" userLabel="Game Over Label">
+                                <rect key="frame" x="121" y="178" width="172" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.15051761662129851" green="0.85410255193710327" blue="0.0013145102856516725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqu-tK-YaU">
+                                <rect key="frame" x="111" y="246" width="101" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.059315619446219013" green="0.7693973183631897" blue="0.15397817814548598" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Restart">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <gestureRecognizers/>
                         <connections>
@@ -41,6 +60,8 @@
                     </glkView>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="btnRestart" destination="gqu-tK-YaU" id="I6A-tU-YmI"/>
+                        <outlet property="gameOverLabel" destination="yiQ-Md-d6O" id="vkG-UE-oc3"/>
                         <outlet property="highScoreLabel" destination="Mhl-vg-P3c" id="dRl-kL-Cj2"/>
                         <outlet property="scoreLabel" destination="Cyd-uh-0i8" id="gt0-Rm-P8I"/>
                     </connections>
