@@ -11,12 +11,19 @@
 #import "Alien.h"
 #import "Bullet.h"
 //Import header file for model to use here
-
+const int numAliens = 10;
+const int numBullets = 5;
 
 @interface MainViewController ()
 {
+    Alien alienArray[numAliens];
+//    NSMutableArray *bulletArray;
+    Bullet bulletArray[numBullets];
+    
     //Audio player
-    AVAudioPlayer *player;
+//    AVAudioPlayer *player;
+    AVAudioPlayer *bulletSoundPlayer[numBullets];
+    AVAudioPlayer *hitSoundPlayer[numAliens];
     
     // Player ship variables
     bool    _drawShip;
@@ -44,7 +51,7 @@
     bool    _alienMovingRight;
     
     // Alien wave variables
-    NSMutableArray *aliens;
+//    NSMutableArray *aliens;
     
     // Bullet variables for one bullet
     bool    _drawBullet;
@@ -77,9 +84,58 @@
 
 @implementation MainViewController
 
+-(void)setUpBullets
+{
+    for (int newBullet = 0; newBullet < numBullets; newBullet++) {
+        Bullet initBullet = {
+                ._drawBullet = false,
+                ._bulletXPosition = 0.0f,
+                ._bulletYPosition = -5.0f,
+                ._bulletZPosition = -5.1f,
+                ._bulletXRotation = 90.0f,
+                ._bulletYRotation = 0.0f,
+                ._bulletZRotation = 0.0f,
+                ._bulletXScale = 0.15f,
+                ._bulletYScale = 0.15f,
+                ._bulletZScale = 0.15f
+        };
+//        [bulletArray addObject:&initBullet];
+        bulletArray[newBullet] = initBullet;
+    }
+}
+
+-(void)setUpAliens
+{
+    int currentRow = 0;
+    float rowIncrement = 1.0f;
+    for (int newAlien = 0; newAlien < numAliens; newAlien++) {
+        if (newAlien % 5 == 0 && newAlien != 0) {
+            currentRow++;
+        }
+        Alien initAlien = {
+            ._drawAlien = true,
+            ._alienXPosition = -2.0f + (1.0f * newAlien),
+            ._alienYPosition = 4.2f + (rowIncrement * currentRow),
+            ._alienZPosition = -5.0f,
+            ._alienXRotation = 80.0f, //was 90
+            ._alienYRotation = 180.0f,
+            ._alienZRotation = 0.0f,
+            ._alienXScale = 0.06f, //was 0.1
+            ._alienYScale = 0.06f, //was 0.1
+            ._alienZScale = 0.06f, //was 0.1
+            ._alienMovingRight = true
+        };
+        alienArray[newAlien] = initAlien;
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setUpAliens];
+
+    [self setUpBullets];
     
     // Player ship variables
     _drawShip = true;
@@ -92,32 +148,6 @@
     _shipXScale = 0.1f;
     _shipYScale = 0.1f;
     _shipZScale = 0.1f;
-    
-    // Alien variables
-    _drawAlien = true;
-    _alienXPosition = 0.0f;
-    _alienYPosition = 4.2f; //was 4.2f
-    _alienZPosition = -5.0f;
-    _alienXRotation = 80.0f; //was 90
-    _alienYRotation = 180.0f;
-    _alienZRotation = 0.0f;
-    _alienXScale = 0.06f; //was 0.1
-    _alienYScale = 0.06f; //was 0.1
-    _alienZScale = 0.06f; //was 0.1
-    _alienMovingRight = true;
-    
-    // Bullet variables
-    _drawBullet = false;
-    _bulletXPosition = 0.0f;
-    _bulletYPosition = -5.0f;
-    _bulletZPosition = -5.1f;
-    _bulletXRotation = 90.0f;
-    _bulletYRotation = 0.0f;
-    _bulletZRotation = 0.0f;
-    _bulletXScale = 0.15f;
-    _bulletYScale = 0.15f;
-    _bulletZScale = 0.15f;
-
     
     // Score at start
     _score = 0;
@@ -179,14 +209,16 @@
         [self drawShip: _shipXPosition: _shipYPosition: _shipZPosition: _shipXRotation: _shipYRotation: _shipZRotation: _shipXScale: _shipYScale: _shipZScale];
     }
     
-    // Alien
-    if (_drawAlien) {
-        [self drawAlien: _alienXPosition: _alienYPosition: _alienZPosition: _alienXRotation: _alienYRotation: _alienZRotation: _alienXScale: _alienYScale: _alienZScale];
+    for (int a = 0; a < numAliens; a++) {
+        if (alienArray[a]._drawAlien) {
+            [self drawAlien:alienArray[a]._alienXPosition :alienArray[a]._alienYPosition :alienArray[a]._alienZPosition :alienArray[a]._alienXRotation :alienArray[a]._alienYRotation :alienArray[a]._alienZRotation :alienArray[a]._alienXScale :alienArray[a]._alienYScale :alienArray[a]._alienZScale];
+        }
     }
     
-    // Bullet
-    if (_drawBullet) {
-        [self drawBullet: _bulletXPosition: _bulletYPosition: _bulletZPosition: _bulletXRotation: _bulletYRotation: _bulletZRotation: _bulletXScale: _bulletYScale: _bulletZScale];
+    for (int b = 0; b < numBullets; b++) {
+        if (bulletArray[b]._drawBullet) {
+            [self drawBullet:bulletArray[b]._bulletXPosition :bulletArray[b]._bulletYPosition :bulletArray[b]._bulletZPosition :bulletArray[b]._bulletXRotation :bulletArray[b]._bulletYRotation :bulletArray[b]._bulletZRotation :bulletArray[b]._bulletXScale :bulletArray[b]._bulletYScale :bulletArray[b]._bulletZScale];
+        }
     }
 }
 
@@ -310,25 +342,24 @@
     }
 }
 
-//- (void)shoot
-//{
-//    _drawBullet = true;
-//}
 
 - (IBAction)shoot:(UITapGestureRecognizer *)sender
 {
-    if (!_drawBullet) {
-        _bulletYPosition = _shipYPosition;
-        _bulletXPosition = _shipXPosition;
-        _drawBullet = true;
-        //sound effect for shooting
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
-        NSURL *url = [NSURL URLWithString:path];
-        player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
-        
-        [player play];
-    } else{
-        [player stop];
+    for (int b = 0; b < numBullets; b++) {
+        if (!bulletArray[b]._drawBullet) {
+            bulletArray[b]._bulletYPosition = _shipYPosition;
+            bulletArray[b]._bulletXPosition = _shipXPosition;
+            bulletArray[b]._drawBullet = true;
+            //sound effect for shooting
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
+            NSURL *url = [NSURL URLWithString:path];
+            bulletSoundPlayer[b] = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+            
+            [bulletSoundPlayer[b] play];
+            break;
+        } else {
+            [bulletSoundPlayer[b] stop];
+        }
     }
 }
 
@@ -349,14 +380,6 @@
 }
 
 
-//- (IBAction)btn_Audio_play:(id)sender{
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"shoot"ofType:@"wav"];
-//    NSURL *url = [NSURL URLWithString:path];
-//    player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
-//
-//    [player play];
-//}
-
 
 - (void)update
 {
@@ -375,40 +398,42 @@
     _scoreLabel.text = scoreString;
     NSString* highScoreString = [NSString stringWithFormat:@"%i :High Score", _highScore];
     _highScoreLabel.text = highScoreString;
-    if (_drawBullet) {
-        if (_bulletYPosition < 5.0f) {
-            _bulletYPosition += 0.2f;
+    
+    for (int bulletToFire = 0; bulletToFire < numBullets; bulletToFire++) {
+        if (bulletArray[bulletToFire]._drawBullet) {
+            bulletArray[bulletToFire]._bulletYPosition += 0.2f;
             [self collisionCheck];
         }
-        if (_bulletYPosition >= 5.0f) {
-            _drawBullet = false;
+        if (bulletArray[bulletToFire]._bulletYPosition >= 5.0f) {
+            bulletArray[bulletToFire]._drawBullet = false;
         }
     }
     
-    if (_alienMovingRight) {
-        _alienXPosition += 0.05f*_difficultyMultiplier;
-        if (_alienXPosition > 2.5f) {
-            _alienMovingRight = false;
-            _alienYPosition -= 0.5f;
-            _alienXScale += 0.004;
-            _alienYScale += 0.004;
-            _alienZScale += 0.004;
+    for (int alienToMove = 0; alienToMove < numAliens; alienToMove++) {
+        if (alienArray[alienToMove]._alienMovingRight) {
+            alienArray[alienToMove]._alienXPosition += 0.05f*_difficultyMultiplier;
+            if (alienArray[alienToMove]._alienXPosition > 2.5f) {
+                alienArray[alienToMove]._alienMovingRight = false;
+                alienArray[alienToMove]._alienYPosition -= 0.5f;
+//                alienArray[alienToMove]._alienXScale += 0.004;
+//                alienArray[alienToMove]._alienYScale += 0.004;
+//                alienArray[alienToMove]._alienZScale += 0.004;
+            }
+        } else if (!alienArray[alienToMove]._alienMovingRight) {
+            alienArray[alienToMove]._alienXPosition -= 0.05f*_difficultyMultiplier;
+            if (alienArray[alienToMove]._alienXPosition < -2.5f) {
+                alienArray[alienToMove]._alienMovingRight = true;
+                alienArray[alienToMove]._alienYPosition -= 0.5f;
+//                alienArray[alienToMove]._alienXScale += 0.004;
+//                alienArray[alienToMove]._alienYScale += 0.004;
+//                alienArray[alienToMove]._alienZScale += 0.004;
+            }
         }
-    } else if (!_alienMovingRight) {
-        _alienXPosition -= 0.05f*_difficultyMultiplier;
-        if (_alienXPosition < -2.5f) {
-            _alienMovingRight = true;
-            _alienYPosition -= 0.5f;
-            _alienXScale += 0.004;
-            _alienYScale += 0.004;
-            _alienZScale += 0.004;
+        if (alienArray[alienToMove]._alienYPosition < -5.0f) {
+            // Either reset aliens here or set lose condition.
+            alienArray[alienToMove]._alienYPosition = 5.0f;
         }
     }
-    
-//    _xRotation += 1.0f;
-//    _yRotation += 1.0f;
-//    _zRotation += 1.0f;
-    
     
     //linear timer
     if (_difficultyMultiplier < 4)
@@ -429,20 +454,40 @@
 
 - (void)collisionCheck
 {
-    float distanceX = fabsf(_alienXPosition-_bulletXPosition);
-    float distanceY = fabsf(_alienYPosition-_bulletYPosition);
-    
-    if (distanceX < 0.5 && distanceY < 0.2) {
-        _drawAlien = false;
-        _drawBullet = false;
-        _score += 1;
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"hit"ofType:@"wav"];
-        NSURL *url = [NSURL URLWithString:path];
-        player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
-        
-        [player play];
-        [self spawnAlien];
+    for (int alienShip = 0; alienShip < numAliens; alienShip++) {
+        for (int bulletNumber = 0; bulletNumber < numBullets; bulletNumber++) {
+            if (alienArray[alienShip]._drawAlien) {
+                float distanceX = fabsf(alienArray[alienShip]._alienXPosition-bulletArray[bulletNumber]._bulletXPosition);
+                float distanceY = fabsf(alienArray[alienShip]._alienYPosition-bulletArray[bulletNumber]._bulletYPosition);
+                
+                if (distanceX < 0.3 && distanceY < 0.2) {
+                    alienArray[alienShip]._drawAlien = false;
+                    bulletArray[bulletNumber]._drawBullet = false;
+                    _score += 1;
+                    NSString *path = [[NSBundle mainBundle] pathForResource:@"hit"ofType:@"wav"];
+                    NSURL *url = [NSURL URLWithString:path];
+                    hitSoundPlayer[alienShip] = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+                    
+                    [hitSoundPlayer[alienShip] play];
+                    [self spawnAlien: alienShip];
+                }
+            }
+        }
     }
+}
+
+-(void)spawnAlien : (int)shipNumber
+{
+    NSTimeInterval delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      //NSLog(@"Do some work");
+        alienArray[shipNumber]._alienYPosition = 4.2;
+        alienArray[shipNumber]._alienXScale = 0.06;
+        alienArray[shipNumber]._alienYScale = 0.06;
+        alienArray[shipNumber]._alienZScale = 0.06;
+        alienArray[shipNumber]._drawAlien = true;
+    });
 }
 
 - (void)collisionCheckLose
@@ -462,19 +507,6 @@
         NSString* gameOverString = [NSString stringWithFormat:@"Game Over"];
         _gameOverLabel.text = gameOverString;
     }
-}
--(void)spawnAlien
-{
-    NSTimeInterval delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      //NSLog(@"Do some work");
-        _alienYPosition = 4.2;
-        _alienXScale = 0.06;
-        _alienYScale = 0.06;
-        _alienZScale = 0.06;
-        _drawAlien = true;
-    });
 }
 
 - (void)restartGame
