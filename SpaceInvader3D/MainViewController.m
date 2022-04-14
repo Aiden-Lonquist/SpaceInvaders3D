@@ -24,6 +24,7 @@ const int numBullets = 5;
 //    AVAudioPlayer *player;
     AVAudioPlayer *bulletSoundPlayer[numBullets];
     AVAudioPlayer *hitSoundPlayer[numAliens];
+    AVAudioPlayer *musicAudioPlayer;
     
     // Player ship variables
     bool    _drawShip;
@@ -396,7 +397,7 @@ const int numBullets = 5;
     
     NSString* scoreString = [NSString stringWithFormat:@"Score: %i", _score];
     _scoreLabel.text = scoreString;
-    NSString* highScoreString = [NSString stringWithFormat:@"%i :High Score", _highScore];
+    NSString* highScoreString = [NSString stringWithFormat:@"High Score: %i ", _highScore];
     _highScoreLabel.text = highScoreString;
     
     for (int bulletToFire = 0; bulletToFire < numBullets; bulletToFire++) {
@@ -478,7 +479,7 @@ const int numBullets = 5;
 
 -(void)spawnAlien : (int)shipNumber
 {
-    NSTimeInterval delayInSeconds = 2.0;
+    NSTimeInterval delayInSeconds = 3.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
       //NSLog(@"Do some work");

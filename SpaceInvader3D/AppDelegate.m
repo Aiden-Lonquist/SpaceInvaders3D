@@ -17,7 +17,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //BGM Setting
+    NSURL* musicFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bgm" ofType:@"mp3"]];
+    audioPlayer  = [[AVAudioPlayer alloc] initWithContentsOfURL:musicFile  error:NULL];
+    audioPlayer.delegate = self;
+    audioPlayer.numberOfLoops = -1;
+    [audioPlayer play];
+    
     NSError *categoryError = nil;
+    
+    //Sound Effect setting
     BOOL success = [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&categoryError];
     if (!success)
     {
