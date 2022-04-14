@@ -42,7 +42,7 @@ At the end of Final release, Player will be able to:
 * Created lose condition and Restart Function
 * High Score Tracking in the game
 
-## Need to improve base on the playtest result
+## Future Plan (Base on Playtest Result)
 * Menu Screen
 * Background Image
 * Different Types of enemies
