@@ -41,6 +41,7 @@ At the end of Final release, Player will be able to:
 * Player Movement Imporvement
 * Created lose condition and Restart Function
 * High Score Tracking in the game
+* Added Background Music
 
 ## Future Plan (Base on Playtest Result)
 * Menu Screen
